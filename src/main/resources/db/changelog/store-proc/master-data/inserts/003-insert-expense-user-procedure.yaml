@@ -1,0 +1,29 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 003-insert-expense-user-procedure
+      author: srikanth
+      runOnChange: true
+
+      changes:
+        - sql:
+            splitStatements: false
+            endDelimiter: "$$"
+            sql: |
+              CREATE PROCEDURE insert_expense_user()
+              BEGIN
+
+                  INSERT INTO expense_user
+                      (created_by, suffix, created_at, updated_at)
+                  SELECT
+                      'Srikanth Yenagandula',
+                      'SRI_YEN',
+                      NOW(),
+                      NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_user
+                      WHERE suffix = 'SRI_YEN'
+                  );
+
+              END

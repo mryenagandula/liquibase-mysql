@@ -1,0 +1,11 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-execute-insert-expense-category-procedure
+      author: srikanth
+
+      changes:
+
+        - sql:
+            sql: |
+              CALL insert_expense_categories();

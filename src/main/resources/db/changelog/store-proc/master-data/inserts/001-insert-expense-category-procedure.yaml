@@ -1,0 +1,106 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-insert-expense-category-procedure
+      author: srikanth
+      runOnChange: true
+
+      changes:
+        - sql:
+            splitStatements: false
+            endDelimiter: "$$"
+            sql: |
+              CREATE PROCEDURE insert_expense_categories()
+              BEGIN
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'FAMILY', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'FAMILY'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'PERSONAL', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'PERSONAL'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'TRANSPORT', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'TRANSPORT'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'FOOD', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'FOOD'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'HEALTH', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'HEALTH'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'VEHICLE', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'VEHICLE'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'SHOPPING', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'SHOPPING'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'ENTERTAINMENT', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'ENTERTAINMENT'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'OFFICE', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'OFFICE'
+                  );
+
+                  INSERT INTO expense_category
+                      (category_type, created_at, updated_at)
+                  SELECT 'HOUSEHOLD', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_category
+                      WHERE category_type = 'HOUSEHOLD'
+                  );
+
+              END

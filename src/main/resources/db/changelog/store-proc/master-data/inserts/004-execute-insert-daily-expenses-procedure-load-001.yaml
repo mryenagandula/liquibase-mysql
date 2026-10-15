@@ -1,0 +1,11 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 004-execute-insert-daily-expenses-procedure-load-001
+      author: chitti
+
+      changes:
+
+        - sql:
+            sql: |
+              CALL insert_daily_expenses();

@@ -1,0 +1,11 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 002-execute-insert-expense-type-procedure
+      author: srikanth
+
+      changes:
+
+        - sql:
+            sql: |
+              CALL insert_expense_types();

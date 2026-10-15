@@ -1,0 +1,1037 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-insert-daily-expenses-procedure-load-001
+      author: chitti
+      changes:
+        - sql:
+            splitStatements: false
+            sql: |
+              CREATE PROCEDURE insert_daily_expenses()
+              BEGIN
+
+                  /* =====================================================
+                     1. PHOTO FRAME
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id,
+                      expense_type_id,
+                      category_id,
+                      created_by_id,
+                      expense_title,
+                      expense_description,
+                      remarks,
+                      amount,
+                      created_at,
+                      updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260929_00001',
+                      et.id,
+                      ec.id,
+                      eu.id,
+                      'Photo frame',
+                      'Photo frame purchase',
+                      'Personal home-decor purchase',
+                      1000.00,
+                      '2026-09-29 00:00:00',
+                      '2026-09-29 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'PERSONAL'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'SHOPPING'
+                    AND NOT EXISTS (
+                        SELECT 1
+                        FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260929_00001'
+                    );
+
+                  /* =====================================================
+                     2. MUMMY RECHARGE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260929_00002',
+                      et.id, ec.id, eu.id,
+                      'Mummy Recharge',
+                      'Mobile recharge for Mummy',
+                      'Family mobile recharge',
+                      147.00,
+                      '2026-09-29 00:00:00',
+                      '2026-09-29 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FAMILY'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'RECHARGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260929_00002'
+                    );
+
+                  /* =====================================================
+                     3. NANAMMA RECHARGE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260929_00003',
+                      et.id, ec.id, eu.id,
+                      'Nanamma Recharge',
+                      'Mobile recharge for Nanamma',
+                      'Family mobile recharge',
+                      200.00,
+                      '2026-09-29 00:00:00',
+                      '2026-09-29 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FAMILY'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'RECHARGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260929_00003'
+                    );
+
+                  /* =====================================================
+                     4. DADY RECHARGE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260929_00004',
+                      et.id, ec.id, eu.id,
+                      'Dady Recharge',
+                      'Mobile recharge for Dady',
+                      'Family mobile recharge',
+                      200.00,
+                      '2026-09-29 00:00:00',
+                      '2026-09-29 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FAMILY'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'RECHARGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260929_00004'
+                    );
+
+                  /* =====================================================
+                     5. MAHALAXMI MEDICAL - MEDICINE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260929_00005',
+                      et.id, ec.id, eu.id,
+                      'Mahalaxmi Medical Medicine',
+                      'Medicine purchased from Mahalaxmi Medical',
+                      'Medicine for Nanamma',
+                      90.00,
+                      '2026-09-29 00:00:00',
+                      '2026-09-29 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'HEALTH'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'MEDICAL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260929_00005'
+                    );
+
+                  /* =====================================================
+                     6. SRCL TO SECUNDERABAD
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260930_00006',
+                      et.id, ec.id, eu.id,
+                      'SRCL to Secunderabad',
+                      'Travel via car',
+                      'Local/intercity travel',
+                      350.00,
+                      '2026-09-30 00:00:00',
+                      '2026-09-30 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260930_00006'
+                    );
+
+                  /* =====================================================
+                     7. METRO - RAIDURG TO PARADE GROUND
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260930_00007',
+                      et.id, ec.id, eu.id,
+                      'Metro Raidurg from Parade Ground',
+                      'Metro journey',
+                      'Metro fare',
+                      56.00,
+                      '2026-09-30 00:00:00',
+                      '2026-09-30 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260930_00007'
+                    );
+
+                  /* =====================================================
+                     8. AFTERNOON LUNCH
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260930_00008',
+                      et.id, ec.id, eu.id,
+                      'Afternoon Lunch',
+                      'Chicken biryani',
+                      'Lunch expense',
+                      100.00,
+                      '2026-09-30 00:00:00',
+                      '2026-09-30 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'MEAL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260930_00008'
+                    );
+
+                  /* =====================================================
+                     9. RETURN METRO
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20260930_00009',
+                      et.id, ec.id, eu.id,
+                      'Return Metro',
+                      'Return metro journey',
+                      'Return travel fare',
+                      47.00,
+                      '2026-09-30 00:00:00',
+                      '2026-09-30 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20260930_00009'
+                    );
+
+                  /* =====================================================
+                     10. RAJU ROOM RICE BAG
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00010',
+                      et.id, ec.id, eu.id,
+                      'Raju Room Rice Bag',
+                      'Rice bag purchase',
+                      'Grocery for Raju room',
+                      2000.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'HOUSEHOLD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'GROCERY'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00010'
+                    );
+
+                  /* =====================================================
+                     11. KUKATPALLY TO RAIDURG METRO
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00011',
+                      et.id, ec.id, eu.id,
+                      'Kukatpally to Raidurg Metro',
+                      'Metro journey',
+                      'Travel/commute',
+                      56.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00011'
+                    );
+
+                  /* =====================================================
+                     12. EGG RICE OFFICE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00012',
+                      et.id, ec.id, eu.id,
+                      'Egg Rice Office',
+                      'Afternoon lunch',
+                      'Office lunch',
+                      60.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'MEAL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00012'
+                    );
+
+                  /* =====================================================
+                     13. TEA BREAK
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00013',
+                      et.id, ec.id, eu.id,
+                      'Tea Break',
+                      'Tea during break',
+                      'Office tea break',
+                      45.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'BEVERAGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00013'
+                    );
+
+                  /* =====================================================
+                     14. RAIDURG TO MIYAPUR METRO
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00014',
+                      et.id, ec.id, eu.id,
+                      'Raidurg to Miyapur Metro',
+                      'Metro journey',
+                      'Travel to collect iPhone',
+                      65.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00014'
+                    );
+
+                  /* =====================================================
+                     15. CAMPA ORANGE COOL DRINK
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00015',
+                      et.id, ec.id, eu.id,
+                      'Campa Orange Cool Drink',
+                      'Cool drink',
+                      'Refreshment',
+                      10.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'BEVERAGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00015'
+                    );
+
+                  /* =====================================================
+                     16. MIYAPUR TO PARADE GROUND
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00016',
+                      et.id, ec.id, eu.id,
+                      'Miyapur to Parade Ground',
+                      'Metro journey',
+                      'Return/local travel',
+                      56.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00016'
+                    );
+
+                  /* =====================================================
+                     17. WATER BOTTLE AT BUS STAND
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00017',
+                      et.id, ec.id, eu.id,
+                      'Water Bottle at Bus Stand',
+                      'Water bottle',
+                      'Water during journey',
+                      30.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'BEVERAGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00017'
+                    );
+
+                  /* =====================================================
+                     18. BUS TICKET JBS TO SRCL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00018',
+                      et.id, ec.id, eu.id,
+                      'Bus Ticket JBS to SRCL',
+                      'Bus journey',
+                      'Travel to hometown',
+                      230.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'TRANSPORT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'TRAVEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00018'
+                    );
+
+                  /* =====================================================
+                     19. TEA IN BUS JOURNEY
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261001_00019',
+                      et.id, ec.id, eu.id,
+                      'Tea in Bus Journey',
+                      'Tea',
+                      'Refreshment during travel',
+                      15.00,
+                      '2026-10-01 00:00:00',
+                      '2026-10-01 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'BEVERAGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261001_00019'
+                    );
+
+                  /* =====================================================
+                     20. ANNA BIKE PETROL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00020',
+                      et.id, ec.id, eu.id,
+                      'Anna Bike Petrol',
+                      'Petrol for Anna''s bike',
+                      'Bike fuel',
+                      150.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'FUEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00020'
+                    );
+
+                  /* =====================================================
+                     21. ENFIELD CLASSIC STEALTH BLACK ADVANCE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00021',
+                      et.id, ec.id, eu.id,
+                      'Enfield Classic Stealth Black Advance',
+                      'Advance payment',
+                      'Advance toward vehicle purchase',
+                      5000.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'VEHICLE_PURCHASE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00021'
+                    );
+
+                  /* =====================================================
+                     22. CAR DRIVING PETROL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00022',
+                      et.id, ec.id, eu.id,
+                      'Car Driving Petrol',
+                      'Petrol for car',
+                      'Car fuel',
+                      500.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'FUEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00022'
+                    );
+
+                  /* =====================================================
+                     23. SNACKS CAMPA + LAYS
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00023',
+                      et.id, ec.id, eu.id,
+                      'Snacks Campa + Lays',
+                      'Campa and Lays',
+                      'Evening snack',
+                      30.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'SNACK'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00023'
+                    );
+
+                  /* =====================================================
+                     24. OREO BISCUIT
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00024',
+                      et.id, ec.id, eu.id,
+                      'Oreo Biscuit',
+                      'Oreo biscuit',
+                      'Snack',
+                      10.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'SNACK'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00024'
+                    );
+
+                  /* =====================================================
+                     25. RAJANNA FAMILY RESTAURANT
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00025',
+                      et.id, ec.id, eu.id,
+                      'Rajanna Family Restaurant',
+                      'Full mutton biryani',
+                      'Meal expense',
+                      400.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'MEAL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00025'
+                    );
+
+                  /* =====================================================
+                     26. IPHONE CHARGER
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00026',
+                      et.id, ec.id, eu.id,
+                      'iPhone Charger',
+                      'Charger purchase',
+                      'Phone accessory',
+                      2190.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'SHOPPING'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'ELECTRONICS'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00026'
+                    );
+
+                  /* =====================================================
+                     27. IPHONE COVER + SCREEN GUARD
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00027',
+                      et.id, ec.id, eu.id,
+                      'iPhone Cover + Screen Guard',
+                      'Phone protection accessories',
+                      'Phone accessories',
+                      400.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'SHOPPING'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'ELECTRONICS'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00027'
+                    );
+
+                  /* =====================================================
+                     28. MAHALAXMI MEDICAL MEDICINE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261002_00028',
+                      et.id, ec.id, eu.id,
+                      'Mahalaxmi Medical Medicine',
+                      'Medicine purchase',
+                      'Healthcare expense',
+                      600.00,
+                      '2026-10-02 00:00:00',
+                      '2026-10-02 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'HEALTH'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'MEDICAL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261002_00028'
+                    );
+
+                  /* =====================================================
+                     29. RAJANNA MILK DAIRY
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261003_00029',
+                      et.id, ec.id, eu.id,
+                      'Rajanna Milk Dairy',
+                      '1/4 kg paneer',
+                      'Food/grocery purchase',
+                      130.00,
+                      '2026-10-03 00:00:00',
+                      '2026-10-03 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'GROCERY'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261003_00029'
+                    );
+
+                  /* =====================================================
+                     30. CAR DRIVING PETROL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261003_00030',
+                      et.id, ec.id, eu.id,
+                      'Car Driving Petrol',
+                      'Petrol for car',
+                      'Car fuel',
+                      500.00,
+                      '2026-10-03 00:00:00',
+                      '2026-10-03 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'FUEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261003_00030'
+                    );
+
+                  /* =====================================================
+                     31. BOX CRICKET SHARE
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261003_00031',
+                      et.id, ec.id, eu.id,
+                      'Box Cricket Share',
+                      'Shared cricket expense',
+                      'Recreation/sports',
+                      200.00,
+                      '2026-10-03 00:00:00',
+                      '2026-10-03 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'ENTERTAINMENT'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'SPORTS'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261003_00031'
+                    );
+
+                  /* =====================================================
+                     32. PASSION PRO PETROL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261003_00032',
+                      et.id, ec.id, eu.id,
+                      'Passion Pro Petrol',
+                      'Petrol for Passion Pro',
+                      'Bike fuel',
+                      210.00,
+                      '2026-10-03 00:00:00',
+                      '2026-10-03 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'FUEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261003_00032'
+                    );
+
+                  /* =====================================================
+                     33. BADAM MILK
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261003_00033',
+                      et.id, ec.id, eu.id,
+                      'Badam Milk',
+                      'Badam milk',
+                      'Beverage',
+                      40.00,
+                      '2026-10-03 00:00:00',
+                      '2026-10-03 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'FOOD'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'BEVERAGE'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261003_00033'
+                    );
+
+                  /* =====================================================
+                     34. CAR DRIVING PETROL
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261004_00034',
+                      et.id, ec.id, eu.id,
+                      'Car Driving Petrol',
+                      'Petrol for car',
+                      'Car fuel',
+                      550.00,
+                      '2026-10-04 00:00:00',
+                      '2026-10-04 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'VEHICLE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'FUEL'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261004_00034'
+                    );
+
+                  /* =====================================================
+                     35. RED PEN
+                     ===================================================== */
+                  INSERT INTO daily_expense (
+                      expense_id, expense_type_id, category_id,
+                      created_by_id, expense_title, expense_description,
+                      remarks, amount, created_at, updated_at
+                  )
+                  SELECT
+                      'EXP_SRI_YEN_20261004_00035',
+                      et.id, ec.id, eu.id,
+                      'Red Pen',
+                      'Red pen purchase',
+                      'Stationery expense',
+                      5.00,
+                      '2026-10-04 00:00:00',
+                      '2026-10-04 00:00:00'
+                  FROM expense_type et
+                  JOIN expense_category ec
+                      ON ec.category_type = 'OFFICE'
+                  JOIN expense_user eu
+                      ON eu.suffix = 'SRI_YEN'
+                  WHERE et.expense_type = 'STATIONERY'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM daily_expense de
+                        WHERE de.expense_id =
+                              'EXP_SRI_YEN_20261004_00035'
+                    );
+
+              END

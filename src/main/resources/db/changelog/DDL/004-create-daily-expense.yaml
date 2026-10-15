@@ -1,0 +1,107 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 004-create-daily-expense
+      author: srikanth
+
+      changes:
+
+        - createTable:
+            tableName: daily_expense
+
+            columns:
+
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: expense_id
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_daily_expense_expense_id
+
+              - column:
+                  name: expense_type_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: category_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_by_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: expense_title
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: expense_description
+                  type: VARCHAR(500)
+
+              - column:
+                  name: remarks
+                  type: VARCHAR(500)
+
+              - column:
+                  name: amount
+                  type: DECIMAL(12,2)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        # FK: daily_expense -> expense_type
+
+        - addForeignKeyConstraint:
+            baseTableName: daily_expense
+            baseColumnNames: expense_type_id
+            referencedTableName: expense_type
+            referencedColumnNames: id
+            constraintName: fk_daily_expense_type
+
+        # FK: daily_expense -> expense_category
+
+        - addForeignKeyConstraint:
+            baseTableName: daily_expense
+            baseColumnNames: category_id
+            referencedTableName: expense_category
+            referencedColumnNames: id
+            constraintName: fk_daily_expense_category
+
+        # FK: daily_expense -> expense_user
+
+        - addForeignKeyConstraint:
+            baseTableName: daily_expense
+            baseColumnNames: created_by_id
+            referencedTableName: expense_user
+            referencedColumnNames: id
+            constraintName: fk_daily_expense_user

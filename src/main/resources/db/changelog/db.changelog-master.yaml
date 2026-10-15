@@ -1,0 +1,34 @@
+databaseChangeLog:
+# DDL Scripts
+  - include:
+      file: db/changelog/DDL/001-create-expense-user.yaml
+  - include:
+      file: db/changelog/DDL/002-create-expense-type.yaml
+  - include:
+      file: db/changelog/DDL/003-create-expense-category.yaml
+  - include:
+      file: db/changelog/DDL/004-create-daily-expense.yaml
+      
+# STORE PROC > MASTER DATA LOAD - Insert Scripts
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/001-insert-expense-category-procedure.yaml
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/001-execute-insert-expense-category-procedure.yaml
+  
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/002-insert-expense-type-procedure.yaml
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/002-execute-insert-expense-type-procedure.yaml
+      
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/003-insert-expense-user-procedure.yaml
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/003-execute-insert-expense-user-procedure.yaml
+      
+      
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/004-insert-daily-expenses-procedure-load-001.yaml
+  - include:
+      file: db/changelog/store-proc/master-data/inserts/004-execute-insert-daily-expenses-procedure-load-001.yaml
+#  - include:
+#      file: db/changelog/005-insert-master-data.yaml

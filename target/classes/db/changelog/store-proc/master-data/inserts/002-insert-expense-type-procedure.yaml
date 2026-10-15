@@ -1,0 +1,133 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 002-insert-expense-type-procedure
+      author: srikanth
+      runOnChange: true
+
+      changes:
+        - sql:
+            splitStatements: false
+            endDelimiter: "$$"
+            sql: |
+              CREATE PROCEDURE insert_expense_types()
+              BEGIN
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'RECHARGE', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'RECHARGE'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'MEDICAL', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'MEDICAL'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'TRAVEL', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'TRAVEL'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'MEAL', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'MEAL'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'SNACK', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'SNACK'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'FUEL', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'FUEL'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'VEHICLE_PURCHASE', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'VEHICLE_PURCHASE'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'ELECTRONICS', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'ELECTRONICS'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'SPORTS', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'SPORTS'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'GROCERY', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'GROCERY'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'BEVERAGE', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'BEVERAGE'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'STATIONERY', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'STATIONERY'
+                  );
+
+                  INSERT INTO expense_type
+                      (expense_type, created_at, updated_at)
+                  SELECT 'SHOPPING', NOW(), NOW()
+                  WHERE NOT EXISTS (
+                      SELECT 1
+                      FROM expense_type
+                      WHERE expense_type = 'SHOPPING'
+                  );
+
+              END
